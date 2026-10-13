@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-app-green
+  labels:
+    app: devops-app
+    version: green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devops-app
+      version: green
+  template:
+    metadata:
+      labels:
+        app: devops-app
+        version: green
+    spec:
+      containers:
+        - name: devops-app
+          image: devops-app:v2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: APP_VERSION
+              value: "v2.0.0"
+            - name: APP_COLOR
+              value: "green"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
