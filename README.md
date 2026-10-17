@@ -1,4 +1,4 @@
-# Entregable 1 DevOps: Despliegue Blue/Green
+# Entregable 2 DevOps: Monitoreo
 
 Notes API desplegada en Kubernetes (Docker Desktop) usando una estrategia
 Blue/Green: v1 (blue) y v2 (green) corren en paralelo, y el tráfico se
